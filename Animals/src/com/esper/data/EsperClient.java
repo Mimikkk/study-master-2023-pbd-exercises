@@ -22,7 +22,7 @@ public final class EsperClient {
     var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "records");
     statement.addListener((events, __, ___, ____) -> stream(events).forEach(EsperClient::logEvent));
 
-    var provider = new AnimalProvider(Faker);
+    var provider = new AnimalDiscoveryProvider(Faker);
     var service = Runtime.getEventService();
 
     long start = System.currentTimeMillis();
