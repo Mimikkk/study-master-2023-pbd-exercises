@@ -9,7 +9,6 @@ import java.util.Random;
 
 public final class AnimalDiscoveryProvider {
   public AnimalDiscoveryProvider(Faker faker) {
-    this.transformer = JsonTransformer.builder().build();
     this.faker = faker;
   }
 
@@ -28,19 +27,19 @@ public final class AnimalDiscoveryProvider {
     );
   }
 
-  public String toJson(AnimalDiscovery animalDiscovery) {
+  public String toJson(AnimalDiscovery discovery) {
     var schema = Schema.of(
-      Field.field("name", animalDiscovery::name),
-      Field.field("latin", animalDiscovery::latin),
-      Field.field("genus", animalDiscovery::genus),
-      Field.field("species", animalDiscovery::species),
-      Field.field("population", animalDiscovery::population),
-      Field.field("timestamp", animalDiscovery::timestamp)
+      Field.field("name", discovery::name),
+      Field.field("latin", discovery::latin),
+      Field.field("genus", discovery::genus),
+      Field.field("species", discovery::species),
+      Field.field("population", discovery::population),
+      Field.field("timestamp", discovery::timestamp)
     );
 
     return transformer.generate(schema, 1);
   }
 
-  private final JsonTransformer<Object> transformer;
+  private final JsonTransformer<Object> transformer = JsonTransformer.builder().build();
   private final Faker faker;
 }
