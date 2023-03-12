@@ -29,7 +29,7 @@ public final class EsperClient {
 
     while (System.currentTimeMillis() < start + (1000L * RunTime)) {
       for (int i = 0; i < RecordsPerSecond; i++) {
-        var timestamp = Faker.date().past(30, TimeUnit.SECONDS).toString();
+        var timestamp = Faker.date().past(366 * 2, TimeUnit.DAYS).toString();
 
         service.sendEventJson(provider.toJson(provider.provide(timestamp)), "AnimalDiscoveryEvent");
       }
@@ -78,7 +78,7 @@ public final class EsperClient {
   private static final Faker Faker = new Faker();
   private static EPDeployment Deployment;
   private static EPRuntime Runtime;
-  private static int RecordsPerSecond = 2;
+  private static int RecordsPerSecond = 20;
   private static int RunTime = 3;
 }
 
