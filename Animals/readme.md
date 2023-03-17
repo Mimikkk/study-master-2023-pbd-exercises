@@ -12,9 +12,8 @@ przebadania populacji.
 Z tego powodu, dane są uzupełnione o etykietę czasową związaną z momentem odkrycia grupy populacji zwierząt dopiero po
 pewnym
 okresie od czasu odkrycia
-pierwszego osobnika grupy. Etykieta ta może się losowo spóźniać w stosunku do czasu systemowego max do 2 lat z powodu
-czasu potrzebnego do pełnego przebadania
-populacji.
+pierwszego osobnika grupy. Etykieta ta może się losowo spóźniać w stosunku do czasu systemowego max do 30 sekund z powodu
+czasu potrzebnego do pełnego przebadania populacji.
 
 # Opis atrybutów
 
@@ -53,7 +52,7 @@ Utrzymuj informacje dotyczące średniej liczby osobników każdego gatunku w os
 
 ## Wykrywanie anomalii
 
-Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy populacji poniżej 500 osobników.
+Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy populacji poniżej 500 osobników na podstawie pojedyńczego zdarzenia.
 
 ## Wykrywanie anomalii oparte na agregacji
 

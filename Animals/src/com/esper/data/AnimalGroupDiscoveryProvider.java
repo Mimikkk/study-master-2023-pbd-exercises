@@ -7,12 +7,12 @@ import net.datafaker.transformations.Schema;
 
 import java.util.Random;
 
-public final class AnimalDiscoveryProvider {
-  public AnimalDiscoveryProvider(Faker faker) {
+public final class AnimalGroupDiscoveryProvider {
+  public AnimalGroupDiscoveryProvider(Faker faker) {
     this.faker = faker;
   }
 
-  public AnimalDiscovery provide(String timestamp) {
+  public AnimalGroupDiscovery provide(String timestamp) {
     var name = faker.animal().name();
     var population = faker.number().randomNumber(4, false);
 
@@ -27,7 +27,7 @@ public final class AnimalDiscoveryProvider {
     );
   }
 
-  public String toJson(AnimalDiscovery discovery) {
+  public String toJson(AnimalGroupDiscovery discovery) {
     var schema = Schema.of(
       Field.field("name", discovery::name),
       Field.field("latin", discovery::latin),

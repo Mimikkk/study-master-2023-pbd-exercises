@@ -11,7 +11,6 @@ import net.datafaker.Faker;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
-
 import static java.util.Arrays.*;
 
 public final class EsperClient {
@@ -22,16 +21,16 @@ public final class EsperClient {
     var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "records");
     statement.addListener((events, __, ___, ____) -> stream(events).forEach(EsperClient::logEvent));
 
-    var provider = new AnimalDiscoveryProvider(Faker);
+    var provider = new AnimalGroupDiscoveryProvider(Faker);
     var service = Runtime.getEventService();
 
     long start = System.currentTimeMillis();
 
     while (System.currentTimeMillis() < start + (1000L * RunTime)) {
       for (int i = 0; i < RecordsPerSecond; i++) {
-        var timestamp = Faker.date().past(366 * 2, TimeUnit.DAYS).toString();
+        var timestamp = Faker.date().past(30, TimeUnit.SECONDS).toString();
 
-        service.sendEventJson(provider.toJson(provider.provide(timestamp)), "AnimalDiscoveryEvent");
+        service.sendEventJson(provider.toJson(provider.provide(timestamp)), "AnimalGroupDiscoveryEvent");
       }
 
       waitTillNextBatch();
@@ -51,8 +50,15 @@ public final class EsperClient {
 
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
-        @public @buseventtype create json schema AnimalDiscoveryEvent(name string, latin string, genus string, species string, population int, timestamp string);
-        @name('records') SELECT * from AnimalDiscoveryEvent;
+        @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
+          name string, 
+          latin string, 
+          genus string,
+          species string, 
+          population int, 
+          timestamp string
+        );
+        @name('records') SELECT * from AnimalGroupDiscoveryEvent;
         """, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
