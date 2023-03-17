@@ -17,7 +17,7 @@ public final class AnimalGroupDiscoveryProvider {
     var population = faker.number().randomNumber(4, false);
 
     var animal = new Faker(new Random(name.hashCode())).animal();
-    return new AnimalDiscovery(
+    return new AnimalGroupDiscovery(
       name,
       animal.scientificName(),
       animal.genus(),
