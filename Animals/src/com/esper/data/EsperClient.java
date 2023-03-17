@@ -11,6 +11,7 @@ import net.datafaker.Faker;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Arrays.*;
 
@@ -19,8 +20,14 @@ public final class EsperClient {
     initializeParameters(arguments);
     initializeEsper();
 
-    var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "records");
-    statement.addListener((events, __, ___, ____) -> stream(events).forEach(EsperClient::logEvent));
+    {
+      var i = new AtomicInteger();
+      var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "records");
+      statement.addListener((events, __, ___, ____) -> {
+        System.out.printf("%d : %s\n", i.addAndGet(1), "-".repeat(0x2f));
+        stream(events).forEach(EsperClient::logEvent);
+      });
+    }
 
     var provider = new AnimalGroupDiscoveryProvider(Faker);
     var service = Runtime.getEventService();
@@ -28,7 +35,7 @@ public final class EsperClient {
     long start = System.currentTimeMillis();
 
     while (System.currentTimeMillis() < start + (1000L * RunTime)) {
-      for (int i = 0; i < RecordsPerSecond; i++) {
+      for (var i = 0; i < RecordsPerSecond; i++) {
         var timestamp = Faker.date().past(30, TimeUnit.SECONDS).toString();
 
         service.sendEventJson(provider.toJson(provider.provide(timestamp)), "AnimalGroupDiscoveryEvent");
@@ -59,7 +66,9 @@ public final class EsperClient {
           population int,
           timestamp string
         );
-        @name('records') SELECT * from AnimalGroupDiscoveryEvent;
+        @name('records')
+        select istream genus, population
+        from AnimalGroupDiscoveryEvent#length(10);
         """, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
@@ -71,7 +80,7 @@ public final class EsperClient {
   }
 
   private static void logEvent(EventBean event) {
-    System.out.printf("Received: %s%n", event.getUnderlying());
+    System.out.printf("Received : %s%n", event.getUnderlying());
   }
 
   private static void waitTillNextBatch() throws InterruptedException {
@@ -85,7 +94,7 @@ public final class EsperClient {
   private static final Faker Faker = new Faker();
   private static EPDeployment Deployment;
   private static EPRuntime Runtime;
-  private static int RecordsPerSecond = 20;
-  private static int RunTime = 3;
+  private static int RecordsPerSecond = 40;
+  private static int RunTime = 1;
 }
 
