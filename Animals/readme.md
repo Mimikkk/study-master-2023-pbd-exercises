@@ -1,19 +1,9 @@
 # Opis charakteru danych
+W ramach organizacji zajmującej się kategoryzacją odkrytych zwierząt na nieznanym kontynencie w trakcie przelotów helikopterem zostają zaobserwowane skupiska różnych gatunków.
 
-W ramach organizacji zajmującej się kategoryzacji odkrytych grup zwierząt na nieznanym kontynencie zostają odkryte coraz
-to nowsze
-gatunki.
+Badacze starają się zliczyć zwierzęta w odkrytych skupiskach. Skupiska są kategoryzowane na podstawie nazwy gatunkowej zwierząt, nazwy naukowej, rodzaju gatunkowego oraz liczby osobników.
 
-Badacze odkrywają grupy zwierząt, które są kategoryzowane na podstawie ich nazwy gatunkowej, nazwy naukowej, rodzaju
-gatunkowego
-oraz liczby osobników w odkrytej grupie. Badania te są niezwykle czasochłonne i wymagają wielu lat do pełnego
-przebadania populacji.
-
-Z tego powodu, dane są uzupełnione o etykietę czasową związaną z momentem odkrycia grupy populacji zwierząt dopiero po
-pewnym
-okresie od czasu odkrycia
-pierwszego osobnika grupy. Etykieta ta może się losowo spóźniać w stosunku do czasu systemowego max do 30 sekund z powodu
-czasu potrzebnego do pełnego przebadania populacji.
+Etykieta czasowa związana z momentem odkrycia skupiska zwierząt może losowo spóźniać w stosunku do czasu systemowego max do 30 sekund z powodu kiepskiego łącza. Nowy kontynent nie ma dobrego zasięgu.
 
 # Opis atrybutów
 
@@ -41,7 +31,7 @@ Atrybuty w każdym zdarzeniu mają następujące znaczenie:
     - kategoria: atrybut lub atrybuty, których wartości można agregować
 - ts
     - typ: string
-    - znaczenie: czas odkrycia grupy zwierząt
+    - znaczenie: czas odkrycia skupiska zwierząt
     - kategoria: znacznik czasowy zdarzeń
 
 # Opis trzech przykładowych analiz
@@ -57,3 +47,21 @@ Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy populacji poniże
 ## Wykrywanie anomalii oparte na agregacji
 
 Wykrywaj przypadki, w których ostatnie 3 odkryte grupy zwierząt określonego gatunku będą miały poniżej 1000 osobników.
+
+# Zadania
+
+## Zadanie 1 - 
+Utrzymuj średnią liczbą odrytych zwierząt w każdym z gatunków dla każdych kolejnych 20 sekund.
+
+Odnajdź takie nowe zdarzenia, które znajdują się w oknie liczności odkrytych gatunków oraz ich liczność przewyższa aktualną średnią wartość.
+
+Rozwiązanie
+```epl
+create window AnimalCounter as select * from KursAkcji group by genus;
+```
+
+## Zadanie 2
+
+
+## Zadanie 4
+
