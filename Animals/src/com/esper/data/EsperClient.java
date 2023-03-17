@@ -11,6 +11,7 @@ import net.datafaker.Faker;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
+
 import static java.util.Arrays.*;
 
 public final class EsperClient {
@@ -51,11 +52,11 @@ public final class EsperClient {
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
         @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
-          name string, 
-          latin string, 
+          name string,
+          latin string,
           genus string,
-          species string, 
-          population int, 
+          species string,
+          population int,
           timestamp string
         );
         @name('records') SELECT * from AnimalGroupDiscoveryEvent;
