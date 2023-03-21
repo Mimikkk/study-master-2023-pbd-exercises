@@ -105,13 +105,24 @@ group by name having avg(population) / 4 > population;
 rozwiązania wymaga użycia:
 
 - nazwanego okna lub tabeli
-- połączenia lub wielu etapów przetwarzania
+- połączenia lub użycie wiele etapów przetwarzania
 
-Utrzymuj średnią liczbą odrytych zwierząt w każdym z gatunków dla każdych kolejnych 20 sekund.
-
-Odnajdź takie nowe zdarzenia, które znajdują się w oknie liczności odkrytych gatunków oraz ich liczność przewyższa
-aktualną średnią wartość.
+Badaczom zależy na utrzymaniu równowagi w ekosystemie, szczególnie pomiędzy dwoma gatunkami zwierząt - pand i krokodyli.
+W związku z tym wymagane jest, aby obserwować osobno te dwa rodzaje i informować kiedy średnia liczba osobników w
+ostatnich 10
+obserwacjach pand jest mniejsza od średniej liczby osobników w ostatnich 10 obserwacjach krokodyli.
 
 ```epl
-create window AnimalCounter as select * from KursAkcji group by genus;
+create window PandaWindow#length(10) as AnimalGroupDiscoveryEvent;
+create window CrocodileWindow#length(10) as AnimalGroupDiscoveryEvent;
+                
+on AnimalGroupDiscoveryEvent(name = 'panda') merge PandaWindow insert select *;
+on AnimalGroupDiscoveryEvent(name = 'crocodile') merge CrocodileWindow insert select *;
+        
+@name('records')
+select
+  avg(pw.population) as panda_population,
+  avg(cw.population) as crocodile_population
+  from PandaWindow pw, CrocodileWindow cw
+  having avg(pw.population) > avg(cw.population);
 ```
