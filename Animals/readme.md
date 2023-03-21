@@ -1,9 +1,18 @@
 # Opis charakteru danych
-W ramach organizacji zajmującej się kategoryzacją odkrytych zwierząt na nieznanym kontynencie w trakcie przelotów helikopterem zostają zaobserwowane skupiska różnych gatunków.
 
-Badacze starają się zliczyć zwierzęta w odkrytych skupiskach. Skupiska są kategoryzowane na podstawie nazwy gatunkowej zwierząt, nazwy naukowej, rodzaju gatunkowego oraz liczby osobników.
+Na nieznanym kontynencie istnieją ekspedycje naukowe korzystające z helikopterów, aby dokonywać przeloty i obserwować
+różnorodność gatunków zwierząt zamieszkujących ten tajemniczy ląd.
 
-Etykieta czasowa związana z momentem odkrycia skupiska zwierząt może losowo spóźniać w stosunku do czasu systemowego max do 30 sekund z powodu kiepskiego łącza. Nowy kontynent nie ma dobrego zasięgu.
+Głównym celem tego przedsięwzięcia jest przeprowadzenie systematycznych badań nad różnymi gatunkami, ich klasyfikacja, a
+także monitorowanie ich populacji w celu zrozumienia dynamiki ekosystemu na tym kontynencie. W trakcie przelotów,
+badacze zauważają skupiska zwierząt, które następnie starają się zliczyć, zidentyfikować i sklasyfikować.
+
+Skupiska zwierząt są kategoryzowane według kilku kryteriów, takich jak nazwa gatunkowa, nazwa naukowa, rodzaj gatunkowy
+oraz liczba osobników. W ten sposób naukowcy mają możliwość śledzenia dynamiki populacji. Ważnym elementem tego procesu
+jest również uwzględnienie etykiety czasowej związaną z momentem odkrycia skupiska zwierząt.
+
+Ze względu na trudności związane z komunikacją na tym nieznanym kontynencie, istnieje możliwość, że etykieta czasowa
+może losowo spóźniać się w stosunku do czasu systemowego maksymalnie do 30 sekund.
 
 # Opis atrybutów
 
@@ -42,7 +51,8 @@ Utrzymuj informacje dotyczące średniej liczby osobników każdego gatunku w os
 
 ## Wykrywanie anomalii
 
-Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy populacji poniżej 500 osobników na podstawie pojedyńczego zdarzenia.
+Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy populacji poniżej 500 osobników na podstawie pojedyńczego
+zdarzenia.
 
 ## Wykrywanie anomalii oparte na agregacji
 
@@ -50,18 +60,20 @@ Wykrywaj przypadki, w których ostatnie 3 odkryte grupy zwierząt określonego g
 
 # Zadania
 
-## Zadanie 1 - 
+## Zadanie 1 -
+
 Utrzymuj średnią liczbą odrytych zwierząt w każdym z gatunków dla każdych kolejnych 20 sekund.
 
-Odnajdź takie nowe zdarzenia, które znajdują się w oknie liczności odkrytych gatunków oraz ich liczność przewyższa aktualną średnią wartość.
+Odnajdź takie nowe zdarzenia, które znajdują się w oknie liczności odkrytych gatunków oraz ich liczność przewyższa
+aktualną średnią wartość.
 
 Rozwiązanie
+
 ```epl
 create window AnimalCounter as select * from KursAkcji group by genus;
 ```
 
 ## Zadanie 2
-
 
 ## Zadanie 4
 
