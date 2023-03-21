@@ -60,20 +60,58 @@ Wykrywaj przypadki, w których ostatnie 3 odkryte grupy zwierząt określonego g
 
 # Zadania
 
-## Zadanie 1 -
+## Zestaw zadań 2:
+
+## Zadanie 1 - Prosta agregacja
+
+Utrzymuj informacje dotyczące średniej liczby osobników względem gatunku w ostatnich 100 odkryciach.
+
+### Polecenie
+
+```epl
+select species, avg(population) as avg_population
+  from AnimalGroupDiscoveryEvent#length(100)
+  group by species;
+```
+
+## Zadanie 2 - Proste wykrywanie anomalii (selekcją zdarzeń):
+
+Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy populacji poniżej 500 osobników na podstawie pojedynczego
+zdarzenia.
+
+### Polecenie
+
+```epl
+select name, population
+from AnimalGroupDiscoveryEvent#length(25) where population < 500;
+```
+
+## Zadanie 3 - Wykrywanie anomalii wykorzystujące wyniki agregacji:
+
+Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy osobników.
+Na zagrożenie wskazuje fakt, że liczba osobników zaobserwowana w danej grupie jest mniejsza niż 25% średniej liczby
+osobników w całej populacji gatunku.
+
+### Polecenie
+
+```epl
+select name, population, avg(population) as avg_population
+from AnimalGroupDiscoveryEvent
+group by name having avg(population) / 4 > population;
+```
+
+## Zadanie 4 - Złożony przypadek:
+
+rozwiązania wymaga użycia:
+
+- nazwanego okna lub tabeli
+- połączenia lub wielu etapów przetwarzania
 
 Utrzymuj średnią liczbą odrytych zwierząt w każdym z gatunków dla każdych kolejnych 20 sekund.
 
 Odnajdź takie nowe zdarzenia, które znajdują się w oknie liczności odkrytych gatunków oraz ich liczność przewyższa
 aktualną średnią wartość.
 
-Rozwiązanie
-
 ```epl
 create window AnimalCounter as select * from KursAkcji group by genus;
 ```
-
-## Zadanie 2
-
-## Zadanie 4
-

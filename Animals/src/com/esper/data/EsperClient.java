@@ -25,7 +25,9 @@ public final class EsperClient {
       var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "records");
       statement.addListener((events, __, ___, ____) -> {
         System.out.printf("%d : %s\n", i.addAndGet(1), "-".repeat(0x2f));
-        stream(events).forEach(EsperClient::logEvent);
+        for (EventBean event : events) {
+          logEvent(event);
+        }
       });
     }
 
@@ -67,8 +69,8 @@ public final class EsperClient {
           timestamp string
         );
         @name('records')
-        select istream genus, population
-        from AnimalGroupDiscoveryEvent#length(10);
+        select name, population
+          from AnimalGroupDiscoveryEvent#length(25) where population < 500;
         """, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
@@ -94,7 +96,7 @@ public final class EsperClient {
   private static final Faker Faker = new Faker();
   private static EPDeployment Deployment;
   private static EPRuntime Runtime;
-  private static int RecordsPerSecond = 40;
+  private static int RecordsPerSecond = 1000;
   private static int RunTime = 1;
 }
 
