@@ -70,18 +70,16 @@ public final class EsperClient {
         );
         create window PandaWindow#length(10) as AnimalGroupDiscoveryEvent;
         create window CrocodileWindow#length(10) as AnimalGroupDiscoveryEvent;
-                
+
         on AnimalGroupDiscoveryEvent(name = 'panda') merge PandaWindow insert select *;
         on AnimalGroupDiscoveryEvent(name = 'crocodile') merge CrocodileWindow insert select *;
-                
+
         @name('records')
         select
           avg(pw.population) as panda_population,
           avg(cw.population) as crocodile_population
           from PandaWindow pw, CrocodileWindow cw
-          having avg(pw.population) > avg(cw.population);
-          
-          
+          having avg(pw.population) < avg(cw.population);
         """, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);

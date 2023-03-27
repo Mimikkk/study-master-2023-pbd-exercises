@@ -83,7 +83,7 @@ zdarzenia.
 
 ```epl
 select name, population
-from AnimalGroupDiscoveryEvent#length(25) where population < 500;
+from AnimalGroupDiscoveryEvent where population < 500;
 ```
 
 ## Zadanie 3 - Wykrywanie anomalii wykorzystujące wyniki agregacji:
