@@ -142,9 +142,24 @@ Wymagane użycie:
 - operatora `until`
 - operatora `where`
 
+Badacze są szczególnie zainteresowani jednym z wymarłych gatunków, którego nie spotkamy już na znanych nam kontynentach.
+Mowa oczywiście o MAMUTACH (ang. mammoth), które jak się okazuje występują na nowo odkrytym lądzie! Naukowcom zależy, aby
+określić czy jest dość rzadko spotykanym okazem, czy może jednak jego populacja zajmuje dużą część zaobserwowanych
+zwierząt. W tym celu chcą sprawdzić, jakim procentem wszystkich jednostek zliczonych do zanotowania grupy Mamutów są
+właśnie te stworzenia, co jednoznacznie wskaże na prawdopodobieństwo ich spotkania w trakcie wędrówki. Zakładają oni
+jednak, że interesuje ich jedynie pierwsze 5 sekund od nadchodzących sygnałów dotyczących odkryć na kontynencie w trakcie lotu helikopterem,
+aby umożliwić ewentualną pieszą wycieczkę w miarę racjonalnej odległości.
+
 ##### Polecenie
 
 ```epl
+select
+  mammoth.population / (animals.sumof(a => a.population) + mammoth.population) * 100 as mammoth_part_of_population
+  from pattern [
+    animals=AnimalGroupDiscoveryEvent
+      until mammoth=AnimalGroupDiscoveryEvent(name='mammoth')
+      where timer:within(5 seconds)
+  ];
 ```
 
 #### Zadanie 2 - Operator następstwa/Operator Logiczny
@@ -154,9 +169,36 @@ Wymagane użycie:
 - dwukrotnego operatora następstwa `->`
 - operatora logicznej `alternatywy` / `koniunkcji`
 
+Badacze podróżując po nowym lądzie napotykają lokalizacje z dużymi skupiskami zwierząt różnych gatunków, przykładowo
+wodopoje. Grupy badawcze przemieszczają się z pewną ustaloną prędkością, więc zakładamy że różne grupy zaobserwowane
+przez sygnały odkrycia
+w obrębie 0.5 sekundy informują o możliwości zaistnienia takiej interakcji. W miejscach takich często dochodzi
+do rywalizacji zwierząt o surowce i dominacji pewnych gatunków nad innymi. Z drugiej strony, gatunki mogą też
+koegzystować w synergii.
+
+Badaczy interesują obszary, w których można takie zjawiska zaobserwować, a wykrywane są one
+poprzez odnalezienie dwóch wyjątkowo dużych grup pewnych różnych od siebie gatunków, co może wskazywać na ich synergię,
+która dominuje następny, trzeci wykryty w okolicy gatunek.
+
+Obserwacja rozpoczyna się od odkrycia dużej grupy składającej się z ponad 7000 osobników. Następnie odnalezienia innego
+gatunku, również o populacji przekraczającej 7000 osobników. Ostatecznie zidentyfikowanie gatunku zdominowanego, który
+nie należy ani do pierwszego, ani do drugiego gatunku, a jego populacja wynosi mniej niż 500 osobników.
+
 ##### Polecenie
 
 ```epl
+select
+  first_.name, first_.population,
+  second_.name, second_.population,
+  endangered.name, endangered.population
+  from pattern [
+  (first_=AnimalGroupDiscoveryEvent(population > 7000) ->
+    second_=AnimalGroupDiscoveryEvent(population > 7000)
+    and AnimalGroupDiscoveryEvent(name != first_.name)
+    )
+  -> endangered=AnimalGroupDiscoveryEvent(population < 500, name != first_.name and name != second_.name)
+  where timer:within(0.5 seconds)
+];
 ```
 
 #### Zadanie 3 - Match Recognize
@@ -165,7 +207,24 @@ Wymagane użycie:
 
 - operatora `MATCH_RECOGNIZE`
 
+Zwierzęta jako stworzenia stadne i terytorialne zazwyczaj żyją poruszając sie w pewnym obszarze terenu. Takie terytorium
+posiada również swoje centrum, którym może być wodopój, schronienie bądź źródło pożywienia. Naukowcy korzystając z
+okazji po dostaniu się do takiego punktu chcą przyjrzeć się bliżej natrafionemu gatunkowi zwierząt. W celu pozostania
+jak najbliżej centrum, w którym zazwyczaj występują większe grupy, obserwują zdarzenia występowania danego gatunku.
+Jeśli okaże się, że kolejne trzy obserwacje grup zwierząt tego samego gatunku maleją pod względem liczności populacji to
+dla naukowców będzie to sygnał, iż powoli oddalają się od danego terytorium występowania.
+
 ##### Polecenie
 
 ```epl
+select * from AnimalGroupDiscoveryEvent match_recognize(
+  partition by name
+  measures
+    A.name as a_name,
+    A.population as a_pop, B.population as b_pop, C.population as c_pop
+  pattern (A B C)
+  define
+    C as C.population > B.population,
+    B as B.population > A.population
+);
 ```
