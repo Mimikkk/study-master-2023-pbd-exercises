@@ -121,6 +121,8 @@ dla naukowców będzie to sygnał, iż powoli oddalają się od danego terytoriu
 
 ###### Footnote
 
+Do uruchomienia projektu została użyta wersja SDK `Amazon Corretto 19`.
+
 Jeżeli klasa [EsperClient](./src/com/esper/data/EsperClient.java) nie jest od razu rozpoznana jako główna, należy
 ustawić folder [src](./src) jako katalog źródłowy.
 Prawy przycisk `Mark Directory as / Sources Root`
