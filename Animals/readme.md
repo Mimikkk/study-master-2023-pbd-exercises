@@ -1,11 +1,10 @@
-## Laboratorium 2.
+# Charakterystyka danych
 
-### Opis charakteru danych
-
+Opis charakteru danych
 Na nieznanym kontynencie istnieją ekspedycje naukowe korzystające z helikopterów, aby dokonywać przeloty i obserwować
 różnorodność gatunków zwierząt zamieszkujących ten tajemniczy ląd.
 
-Głównym celem tego przedsięwzięcia jest przeprowadzenie systematycznych badań nad różnymi gatunkami, ich klasyfikacja, a
+Głównym celem tego przedsięwzięcia jest przeprowadzenie systematycznych badań nad różnymi gatunkami, ich klasyfikacją, a
 także monitorowanie ich populacji w celu zrozumienia dynamiki ekosystemu na tym kontynencie. W trakcie przelotów,
 badacze zauważają skupiska zwierząt, które następnie starają się zliczyć, zidentyfikować i sklasyfikować.
 
@@ -16,158 +15,85 @@ jest również uwzględnienie etykiety czasowej związaną z momentem odkrycia s
 Ze względu na trudności związane z komunikacją na tym nieznanym kontynencie, istnieje możliwość, że etykieta czasowa
 może losowo spóźniać się w stosunku do czasu systemowego maksymalnie do 30 sekund.
 
-### Opis atrybutów
+# Opis atrybutów
 
-Atrybuty w każdym zdarzeniu mają następujące znaczenie:
+**Atrybuty w każdym zdarzeniu mają następujące znaczenie**:
 
-- name
+- **name**
     - typ: string
     - znaczenie: nazwa gatunkowa
     - kategoria: atrybut, lub atrybuty, których wartości pozwalają na identyfikacje zwierzęcia
-- latin
+- **latin**
     - typ: string
     - znaczenie: nazwa naukowa zwierzęcia
     - kategoria: atrybut lub atrybuty dodatkowe, opisujące zdarzenie
-- species
+- **species**
     - typ: string
-    - znaczenie:  gutunek zwierzęcia
+    - znaczenie: gutunek zwierzęcia
     - kategoria: atrybut lub atrybuty, których wartości można grupować
-- genus
+- **genus**
     - typ: string
     - znaczenie: rodzaj gatunkowy zwierzęcia
     - kategoria: atrybut, lub atrybuty, po których można dane grupować
-- population
+- **population**
     - typ: long (1 - 9999)
     - znaczenie: liczba odnalezionej grupy zwierząt
     - kategoria: atrybut lub atrybuty, których wartości można agregować
-- ts
+- **ts**
     - typ: string
     - znaczenie: czas odkrycia skupiska zwierząt
     - kategoria: znacznik czasowy zdarzeń
 
-### Opis trzech przykładowych analiz
+# Zadania
 
-#### Agregacja
+Opracuj rozwiązania poniższych zadań.
 
-Utrzymuj informacje dotyczące średniej liczby osobników każdego gatunku w ostatnich 5 odkryciach.
+* Opieraj się strumieniu zdarzeń zgodnych ze schematem `AnimalGroupDiscoveryEvent`
+* W każdym rozwiązaniu możesz skorzystać z jednego lub kilku poleceń EPL.
+* Ostatnie polecenie będące ostatecznym rozwiązaniem zadania musi
+    * być poleceniem `select`
+    * posiadającym etykietę `answer`, przykładowo:
+  ```sql
+    @name('answer') 
+    select *
+    from AnimalGroupDiscoveryEvent;
+  ```
 
-#### Wykrywanie anomalii
+## Zadanie 1
 
-Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy populacji poniżej 500 osobników na podstawie pojedyńczego
-zdarzenia.
+Utrzymuj informacje dotyczące średniej liczby osobników w odkrytych grupach względem gatunku, w ostatnich 100
+odkryciach.
 
-#### Wykrywanie anomalii oparte na agregacji
+## Zadanie 2
 
-Wykrywaj przypadki, w których ostatnie 3 odkryte grupy zwierząt określonego gatunku będą miały poniżej 1000 osobników.
+Wykrywaj przypadki odnalezienia potencjalnie zagrożonej zniknięciem grupy zwierząt. Są one notowane przez badaczy do
+późniejszych badań, jeżeli ich populacja jest poniżej 300 osobników.
 
-## Laboratorium 3.
+## Zadanie 3
 
-### Zestaw zadań 2 - Esper EPL.
+Wykrywaj przypadki odnalezienia potencjalnie zagrożonej zniknięciem grupy osobników.
+Na zagrożenie wskazuje fakt, że liczba osobników zaobserwowana w danej grupie jest mniejsza niż 10% średnia
+osobników we wcześniej spotkanych grupach całej populacji tego gatunku.
 
-#### Zadanie 1 - Prosta agregacja
-
-Utrzymuj informacje dotyczące średniej liczby osobników względem gatunku w ostatnich 100 odkryciach.
-
-##### Polecenie
-
-```epl
-select species, avg(population) as avg_population
-  from AnimalGroupDiscoveryEvent#length(100)
-  group by species;
-```
-
-#### Zadanie 2 - Proste wykrywanie anomalii (selekcją zdarzeń):
-
-Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy populacji poniżej 500 osobników na podstawie pojedynczego
-zdarzenia.
-
-##### Polecenie
-
-```epl
-select name, population
-from AnimalGroupDiscoveryEvent where population < 500;
-```
-
-#### Zadanie 3 - Wykrywanie anomalii wykorzystujące wyniki agregacji:
-
-Wykrywaj przypadki odnalezienia zagrożonej wyginięciem grupy osobników.
-Na zagrożenie wskazuje fakt, że liczba osobników zaobserwowana w danej grupie jest mniejsza niż 25% średniej liczby
-osobników w całej populacji gatunku.
-
-##### Polecenie
-
-```epl
-select name, population, avg(population) as avg_population
-from AnimalGroupDiscoveryEvent
-group by name having avg(population) / 4 > population;
-```
-
-#### Zadanie 4 - Złożony przypadek:
-
-rozwiązania wymaga użycia:
-
-- nazwanego okna lub tabeli
-- połączenia lub użycie wiele etapów przetwarzania
+## Zadanie 4
 
 Badaczom zależy na utrzymaniu równowagi w ekosystemie, szczególnie pomiędzy dwoma gatunkami zwierząt - pand i krokodyli.
-W związku z tym wymagane jest, aby obserwować osobno te dwa rodzaje i informować kiedy średnia liczba osobników w
-ostatnich 10
-obserwacjach pand jest mniejsza od średniej liczby osobników w ostatnich 10 obserwacjach krokodyli.
+W związku z tym wymagane jest monitorowanie tych dwóch gatunków i informować kiedy średnia liczba osobników w ostatnich
+10 obserwacjach pand jest mniejsza od średniej liczby osobników w ostatnich 10 obserwacjach krokodyli.
 
-##### Polecenie
-
-```epl
-create window PandaWindow#length(10) as AnimalGroupDiscoveryEvent;
-create window CrocodileWindow#length(10) as AnimalGroupDiscoveryEvent;
-                
-on AnimalGroupDiscoveryEvent(name = 'panda') merge PandaWindow insert select *;
-on AnimalGroupDiscoveryEvent(name = 'crocodile') merge CrocodileWindow insert select *;
-        
-@name('records')
-select
-  avg(pw.population) as panda_population,
-  avg(cw.population) as crocodile_population
-  from PandaWindow pw, CrocodileWindow cw
-  having avg(pw.population) > avg(cw.population);
-```
-
-## Laboratorium 2
-
-### Zestaw zadań 2 - Esper CEP.
-
-#### Zadanie 1 - Until/Where.
-
-Wymagane użycie:
-
-- operatora `until`
-- operatora `where`
+## Zadanie 5
 
 Badacze są szczególnie zainteresowani jednym z wymarłych gatunków, którego nie spotkamy już na znanych nam kontynentach.
-Mowa oczywiście o MAMUTACH (ang. mammoth), które jak się okazuje występują na nowo odkrytym lądzie! Naukowcom zależy, aby
+Mowa oczywiście o MAMUTACH (ang. mammoth), które jak się okazuje występują na nowo odkrytym lądzie! Naukowcom zależy,
+aby
 określić czy jest dość rzadko spotykanym okazem, czy może jednak jego populacja zajmuje dużą część zaobserwowanych
 zwierząt. W tym celu chcą sprawdzić, jakim procentem wszystkich jednostek zliczonych do zanotowania grupy Mamutów są
 właśnie te stworzenia, co jednoznacznie wskaże na prawdopodobieństwo ich spotkania w trakcie wędrówki. Zakładają oni
-jednak, że interesuje ich jedynie pierwsze 5 sekund od nadchodzących sygnałów dotyczących odkryć na kontynencie w trakcie lotu helikopterem,
+jednak, że interesuje ich jedynie pierwsze 5 sekund od nadchodzących sygnałów dotyczących odkryć na kontynencie w
+trakcie lotu helikopterem,
 aby umożliwić ewentualną pieszą wycieczkę w miarę racjonalnej odległości.
 
-##### Polecenie
-
-```epl
-select
-  mammoth.population / (animals.sumof(a => a.population) + mammoth.population) * 100 as mammoth_part_of_population
-  from pattern [
-    animals=AnimalGroupDiscoveryEvent
-      until mammoth=AnimalGroupDiscoveryEvent(name='mammoth')
-      where timer:within(5 seconds)
-  ];
-```
-
-#### Zadanie 2 - Operator następstwa/Operator Logiczny
-
-Wymagane użycie:
-
-- dwukrotnego operatora następstwa `->`
-- operatora logicznej `alternatywy` / `koniunkcji`
+## Zadanie 6
 
 Badacze podróżując po nowym lądzie napotykają lokalizacje z dużymi skupiskami zwierząt różnych gatunków, przykładowo
 wodopoje. Grupy badawcze przemieszczają się z pewną ustaloną prędkością, więc zakładamy że różne grupy zaobserwowane
@@ -184,28 +110,7 @@ Obserwacja rozpoczyna się od odkrycia dużej grupy składającej się z ponad 7
 gatunku, również o populacji przekraczającej 7000 osobników. Ostatecznie zidentyfikowanie gatunku zdominowanego, który
 nie należy ani do pierwszego, ani do drugiego gatunku, a jego populacja wynosi mniej niż 500 osobników.
 
-##### Polecenie
-
-```epl
-select
-  first_.name, first_.population,
-  second_.name, second_.population,
-  endangered.name, endangered.population
-  from pattern [
-  (first_=AnimalGroupDiscoveryEvent(population > 7000) ->
-    second_=AnimalGroupDiscoveryEvent(population > 7000)
-    and AnimalGroupDiscoveryEvent(name != first_.name)
-    )
-  -> endangered=AnimalGroupDiscoveryEvent(population < 500, name != first_.name and name != second_.name)
-  where timer:within(0.5 seconds)
-];
-```
-
-#### Zadanie 3 - Match Recognize
-
-Wymagane użycie:
-
-- operatora `MATCH_RECOGNIZE`
+## Zadanie 7
 
 Zwierzęta jako stworzenia stadne i terytorialne zazwyczaj żyją poruszając sie w pewnym obszarze terenu. Takie terytorium
 posiada również swoje centrum, którym może być wodopój, schronienie bądź źródło pożywienia. Naukowcy korzystając z
@@ -214,17 +119,8 @@ jak najbliżej centrum, w którym zazwyczaj występują większe grupy, obserwuj
 Jeśli okaże się, że kolejne trzy obserwacje grup zwierząt tego samego gatunku maleją pod względem liczności populacji to
 dla naukowców będzie to sygnał, iż powoli oddalają się od danego terytorium występowania.
 
-##### Polecenie
+###### Footnote
 
-```epl
-select * from AnimalGroupDiscoveryEvent match_recognize(
-  partition by name
-  measures
-    A.name as a_name,
-    A.population as a_pop, B.population as b_pop, C.population as c_pop
-  pattern (A B C)
-  define
-    C as C.population > B.population,
-    B as B.population > A.population
-);
-```
+Jeżeli klasa [EsperClient](./src/com/esper/data/EsperClient.java) nie jest od razu rozpoznana jako główna, należy
+ustawić folder [src](./src) jako katalog źródłowy.
+Prawy przycisk `Mark Directory as / Sources Root`
