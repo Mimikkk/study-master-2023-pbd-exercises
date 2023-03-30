@@ -70,17 +70,8 @@ public final class EsperClient {
         );
                 
                 
-        @name('records')
-        select * from AnimalGroupDiscoveryEvent match_recognize(
-          partition by name
-          measures
-            A.name as a_name,
-            A.population as a_pop, B.population as b_pop, C.population as c_pop
-          pattern (A B C)
-          define
-            C as C.population > B.population,
-            B as B.population > A.population
-        );
+        @name('answer')
+        select * from AnimalGroupDiscoveryEvent;
         """, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
