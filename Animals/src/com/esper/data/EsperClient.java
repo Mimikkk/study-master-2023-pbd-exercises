@@ -38,9 +38,10 @@ public final class EsperClient {
 
     while (System.currentTimeMillis() < start + (1000L * RunTime)) {
       for (var i = 0; i < RecordsPerSecond; i++) {
-        var timestamp = Faker.date().past(30, TimeUnit.SECONDS).toString();
+        var ets = Faker.date().past(30, TimeUnit.SECONDS).toString();
+        var its = Faker.date().past(1, TimeUnit.SECONDS).toString();
 
-        service.sendEventJson(provider.toJson(provider.provide(timestamp)), "AnimalGroupDiscoveryEvent");
+        service.sendEventJson(provider.toJson(provider.provide(ets, its)), "AnimalGroupDiscoveryEvent");
       }
 
       waitTillNextBatch();

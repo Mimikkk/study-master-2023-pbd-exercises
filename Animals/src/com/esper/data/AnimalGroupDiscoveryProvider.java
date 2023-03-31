@@ -12,7 +12,7 @@ public final class AnimalGroupDiscoveryProvider {
     this.faker = faker;
   }
 
-  public AnimalGroupDiscovery provide(String timestamp) {
+  public AnimalGroupDiscovery provide(String ets, String its) {
     var name = faker.animal().name();
     var population = faker.number().randomNumber(4, false);
 
@@ -23,7 +23,8 @@ public final class AnimalGroupDiscoveryProvider {
       animal.genus(),
       animal.species(),
       population,
-      timestamp
+      ets,
+      its
     );
   }
 
@@ -34,7 +35,8 @@ public final class AnimalGroupDiscoveryProvider {
       Field.field("genus", discovery::genus),
       Field.field("species", discovery::species),
       Field.field("population", discovery::population),
-      Field.field("timestamp", discovery::timestamp)
+      Field.field("ets", discovery::ets),
+      Field.field("its", discovery::its)
     );
 
     return transformer.generate(schema, 1);

@@ -1,48 +1,43 @@
 # Charakterystyka danych
 
-Opis charakteru danych
-Na nieznanym kontynencie istnieją ekspedycje naukowe korzystające z helikopterów, aby dokonywać przeloty i obserwować
-różnorodność gatunków zwierząt zamieszkujących ten tajemniczy ląd.
+Na nieznanym kontynencie ekspedycje naukowe obserwują stada zwierząt.
 
-Głównym celem tego przedsięwzięcia jest przeprowadzenie systematycznych badań nad różnymi gatunkami, ich klasyfikacją, a
-także monitorowanie ich populacji w celu zrozumienia dynamiki ekosystemu na tym kontynencie. W trakcie przelotów,
-badacze zauważają skupiska zwierząt, które następnie starają się zliczyć, zidentyfikować i sklasyfikować.
+Głównym celem jest badanie gatunków, ich klasyfikacja i monitorowanie populacji. Skupiska zwierząt są kategoryzowane
+według nazwy, rodzaju i liczby osobników, z uwzględnieniem etykiety czasowej. Etykieta czasowa może się losowo spóźniać
+do 30 sekund z powodu trudności komunikacyjnych na kontynencie.
 
-Skupiska zwierząt są kategoryzowane według kilku kryteriów, takich jak nazwa gatunkowa, nazwa naukowa, rodzaj gatunkowy
-oraz liczba osobników. W ten sposób naukowcy mają możliwość śledzenia dynamiki populacji. Ważnym elementem tego procesu
-jest również uwzględnienie etykiety czasowej związaną z momentem odkrycia skupiska zwierząt.
+W strumieniu pojawiają się zdarzenia zgodne ze schematem `AnimalGroupDiscoveryEvent`.
 
-Ze względu na trudności związane z komunikacją na tym nieznanym kontynencie, istnieje możliwość, że etykieta czasowa
-może losowo spóźniać się w stosunku do czasu systemowego maksymalnie do 30 sekund.
+```sql
+create
+json schema AnimalGroupDiscoveryEvent(
+  name string,
+  latin string,
+  genus string,
+  species string,
+  population int,
+  its string
+  ets string
+);
+```
 
+Każde zdarzenie związane z jest z faktem zaobserwowania stada określonego gatunku.
+
+Dane są uzupełnione są o dwie etykiety czasowe.
+* Pierwsza (`ets`) związana jest z momentem zaobserwowania stada.
+  Etykieta ta może się losowo spóźniać w stosunku do czasu systemowego max do 30 sekund.
+* Druga (`its`) związana jest z momentem rejestracji zdarzenia obserwacji stada.
 # Opis atrybutów
 
 **Atrybuty w każdym zdarzeniu mają następujące znaczenie**:
 
-- **name**
-    - typ: string
-    - znaczenie: nazwa gatunkowa
-    - kategoria: atrybut, lub atrybuty, których wartości pozwalają na identyfikacje zwierzęcia
-- **latin**
-    - typ: string
-    - znaczenie: nazwa naukowa zwierzęcia
-    - kategoria: atrybut lub atrybuty dodatkowe, opisujące zdarzenie
-- **species**
-    - typ: string
-    - znaczenie: gutunek zwierzęcia
-    - kategoria: atrybut lub atrybuty, których wartości można grupować
-- **genus**
-    - typ: string
-    - znaczenie: rodzaj gatunkowy zwierzęcia
-    - kategoria: atrybut, lub atrybuty, po których można dane grupować
-- **population**
-    - typ: long (1 - 9999)
-    - znaczenie: liczba odnalezionej grupy zwierząt
-    - kategoria: atrybut lub atrybuty, których wartości można agregować
-- **ts**
-    - typ: string
-    - znaczenie: czas odkrycia skupiska zwierząt
-    - kategoria: znacznik czasowy zdarzeń
+* `name` - nazwa gatunkowa
+* `latin` - nazwa naukowa
+* `genus` - gtunek
+* `species` - rodzaj gatunkowy
+* `population` - liczba osobników w stadzie
+* `ets` - czas zaobserwowania stada
+* `its` - czas rejestracji faktu obserwacji w systemie
 
 # Zadania
 
