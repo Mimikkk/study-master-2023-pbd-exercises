@@ -22,7 +22,7 @@ public final class EsperClient {
 
     {
       var i = new AtomicInteger();
-      var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "records");
+      var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "answer");
       statement.addListener((events, __, ___, ____) -> {
         System.out.printf("%d : %s\n", i.addAndGet(1), "-".repeat(0x2f));
         for (EventBean event : events) {
