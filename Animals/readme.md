@@ -68,7 +68,7 @@ Wyniki powinny zawierać kolumny:
 
 ## Zadanie 2
 
-Wykrywaj przypadki odnalezienia potencjalnie zagrożonej zniknięciem stadach zwierząt. Są one notowane przez badaczy do
+Wykrywaj przypadki odnalezienia potencjalnie zagrożonych zniknięciem stad zwierząt. Są one notowane przez badaczy do
 późniejszych badań, jeżeli ich populacja jest poniżej 300 osobników.
 
 Wyniki powinny zawierać kolumny:
@@ -106,6 +106,8 @@ Określ ile procent mamutów zaobserwowanych w sygnałach otrzymanych
 w przeciągu ostatnich 5 sekund stanowi ten gatunek. Wskaże to na prawdopodobieństwo ich spotkania
 w trakcie wędrówki na aktualnie przemierzanym obszarze - jeśli jest wysokie, warto jest wylądować i zaobserwować je z
 bliska.
+
+
 
 Wyniki powinny zawierać kolumny:
 
