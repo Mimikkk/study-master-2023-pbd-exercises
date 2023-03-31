@@ -103,9 +103,12 @@ Wyniki powinny zawierać kolumny:
 
 Badacze odkryli na nowym lądzie gatunek uznawany za wymarły - mamuty (ang. mammoth).
 Określ ile procent pojedynczych zwierząt zaobserwowanych w sygnałach otrzymanych
-w przeciągu ostatnich 5 sekund stanowi ten gatunek. Wskaże to na prawdopodobieństwo ich spotkania 
-w trakcie wędrówki na aktualnie przemierzanym obszarze - jeśli jest wysokie, warto jest wylądować i zaobserwować je z bliska.
+w przeciągu ostatnich 5 sekund stanowi ten gatunek. Wskaże to na prawdopodobieństwo ich spotkania
+w trakcie wędrówki na aktualnie przemierzanym obszarze - jeśli jest wysokie, warto jest wylądować i zaobserwować je z
+bliska.
 
+Wyniki powinny zawierać kolumny:
+- `mammoth_part_of_population` - procent mamutów we wszystkich aktualnie zaobserwowanych zwierzętach w momencie odkrycia stada mamutów.
 
 ## Zadanie 6
 
@@ -117,7 +120,6 @@ gatunkiem (poniżej 500 osobników). Badacze chcą poznać takie miejsca.
 
 Wyniki powinny zawierać kolumny:
 
-- `name` -
 - `first_name` - nazwa gatunkowa stada pierwszego podejrzewanego o synergię
 - `second_name` - nazwa gatunkowa stada drugiego podejrzewanego o synergię
 - `endangared_name` - nazwa gatunkowa stada zagrożonego zniknięciem przez rywalizację
