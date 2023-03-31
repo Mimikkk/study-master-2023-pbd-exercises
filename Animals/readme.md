@@ -131,8 +131,7 @@ Wyniki powinny zawierać kolumny:
 
 ## Zadanie 7
 
-Zwierzęta jako posiadają swoje centrum ekosystemowe. Naukowcy chcą dostać się do takich punktów. W celu pozostania jak
-najbliżej centrum.
+Zwierzęta posiadają swoje centra ekosystemowe. Naukowcy chcą dostać się do takich punktów.
 Jeśli okaże się, że kolejne trzy obserwacje grup zwierząt tego samego gatunku maleją pod względem liczności odkrytych
 populacji stad to
 dla naukowców będzie to sygnał, iż powoli oddalają się od danego terytorium występowania.
@@ -140,9 +139,9 @@ dla naukowców będzie to sygnał, iż powoli oddalają się od danego terytoriu
 Wyniki powinny zawierać kolumny:
 
 - `name` -
-- `a_population` - Populacja stada mniejszego
-- `b_population` - Populacja stada środkowego
-- `c_population` - Populacja stada większego
+- `small_population` - Populacja stada mniejszego
+- `normal_population` - Populacja stada środkowego
+- `big_population` - Populacja stada większego
 
 ###### Footnote
 
