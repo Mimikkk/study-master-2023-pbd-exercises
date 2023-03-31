@@ -33,7 +33,7 @@ Dane są uzupełnione są o dwie etykiety czasowe.
 
 * `name` - nazwa gatunkowa
 * `latin` - nazwa naukowa
-* `genus` - gtunek
+* `genus` - gatunek
 * `species` - rodzaj gatunkowy
 * `population` - liczba osobników w stadzie
 * `ets` - czas zaobserwowania stada
@@ -56,13 +56,21 @@ Opracuj rozwiązania poniższych zadań.
 
 ## Zadanie 1
 
-Utrzymuj informacje dotyczące średniej liczby osobników w odkrytych grupach względem gatunku, w ostatnich 100
+Utrzymuj informacje dotyczące średniej liczby osobników w odkrytych stadach względem gatunku, w ostatnich 100
 odkryciach.
+
+Wyniki powinny zawierać kolumny:
+- `avg_population` - średnia liczba osobników w stadzie
+- `genus` - gatunek zwierząt w stadzie
 
 ## Zadanie 2
 
-Wykrywaj przypadki odnalezienia potencjalnie zagrożonej zniknięciem grupy zwierząt. Są one notowane przez badaczy do
+Wykrywaj przypadki odnalezienia potencjalnie zagrożonej zniknięciem stadach zwierząt. Są one notowane przez badaczy do
 późniejszych badań, jeżeli ich populacja jest poniżej 300 osobników.
+
+Wyniki powinny zawierać kolumny:
+- `name` - nazwa zwierzęcia
+- `population` - populacja odkrytego stada
 
 ## Zadanie 3
 
@@ -70,11 +78,20 @@ Wykrywaj przypadki odnalezienia potencjalnie zagrożonej zniknięciem grupy osob
 Na zagrożenie wskazuje fakt, że liczba osobników zaobserwowana w danej grupie jest mniejsza niż 10% średnia
 osobników we wcześniej spotkanych grupach całej populacji tego gatunku.
 
+Wyniki powinny zawierać kolumny:
+- `name` - nazwa zwierzęcia
+- `population` - populacja odkrytego stada
+- `avg_population` - średnia liczba osobników w stadzie
+
 ## Zadanie 4
 
 Badaczom zależy na utrzymaniu równowagi w ekosystemie, szczególnie pomiędzy dwoma gatunkami zwierząt - pand i krokodyli.
 W związku z tym wymagane jest monitorowanie tych dwóch gatunków i informować kiedy średnia liczba osobników w ostatnich
 10 obserwacjach pand jest mniejsza od średniej liczby osobników w ostatnich 10 obserwacjach krokodyli.
+
+Wyniki powinny zawierać kolumny:
+- `avg_panda_population` - średnia liczb osobników w stadach pand
+- `avg_crocodile_population` - średnia liczb osobników w stadach krokodyli
 
 ## Zadanie 5
 
