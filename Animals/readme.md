@@ -102,7 +102,7 @@ Wyniki powinny zawierać kolumny:
 ## Zadanie 5
 
 Badacze odkryli na nowym lądzie gatunek uznawany za wymarły - mamuty (ang. mammoth).
-Określ ile procent pojedynczych zwierząt zaobserwowanych w sygnałach otrzymanych
+Określ ile procent mamutów zaobserwowanych w sygnałach otrzymanych
 w przeciągu ostatnich 5 sekund stanowi ten gatunek. Wskaże to na prawdopodobieństwo ich spotkania
 w trakcie wędrówki na aktualnie przemierzanym obszarze - jeśli jest wysokie, warto jest wylądować i zaobserwować je z
 bliska.
