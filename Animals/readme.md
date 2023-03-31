@@ -108,7 +108,9 @@ w trakcie wędrówki na aktualnie przemierzanym obszarze - jeśli jest wysokie, 
 bliska.
 
 Wyniki powinny zawierać kolumny:
-- `mammoth_part_of_population` - procent mamutów we wszystkich aktualnie zaobserwowanych zwierzętach w momencie odkrycia stada mamutów.
+
+- `mammoth_part_of_population` - procentowy udział mamutów w ostatnich 5 sekundach ze wszystkich aktualnie zaobserwowanych
+  osobników w momencie odkrycia stada mamutów.
 
 ## Zadanie 6
 
