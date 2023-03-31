@@ -124,12 +124,15 @@ nie należy ani do pierwszego, ani do drugiego gatunku, a jego populacja wynosi 
 
 ## Zadanie 7
 
-Zwierzęta jako stworzenia stadne i terytorialne zazwyczaj żyją poruszając sie w pewnym obszarze terenu. Takie terytorium
-posiada również swoje centrum, którym może być wodopój, schronienie bądź źródło pożywienia. Naukowcy korzystając z
-okazji po dostaniu się do takiego punktu chcą przyjrzeć się bliżej natrafionemu gatunkowi zwierząt. W celu pozostania
-jak najbliżej centrum, w którym zazwyczaj występują większe grupy, obserwują zdarzenia występowania danego gatunku.
-Jeśli okaże się, że kolejne trzy obserwacje grup zwierząt tego samego gatunku maleją pod względem liczności populacji to
+Zwierzęta jako posiadają swoje centrum ekosystemowe. Naukowcy chcą dostać się do takich punktów. W celu pozostania jak najbliżej centrum.
+Jeśli okaże się, że kolejne trzy obserwacje grup zwierząt tego samego gatunku maleją pod względem liczności odkrytych populacji stad to
 dla naukowców będzie to sygnał, iż powoli oddalają się od danego terytorium występowania.
+
+Wyniki powinny zawierać kolumny:
+- `name` - 
+- `a_population` - Populacja stada mniejszego
+- `b_population` - Populacja stada środkowego
+- `c_population` - Populacja stada większego
 
 ###### Footnote
 
