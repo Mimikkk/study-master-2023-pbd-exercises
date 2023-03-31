@@ -94,15 +94,11 @@ Wyniki powinny zawierać kolumny:
 
 ## Zadanie 5
 
-Badacze są szczególnie zainteresowani jednym z wymarłych gatunków, którego nie spotkamy już na znanych nam kontynentach.
-Mowa oczywiście o MAMUTACH (ang. mammoth), które jak się okazuje występują na nowo odkrytym lądzie! Naukowcom zależy,
-aby
-określić czy jest dość rzadko spotykanym okazem, czy może jednak jego populacja zajmuje dużą część zaobserwowanych
-zwierząt. W tym celu chcą sprawdzić, jakim procentem wszystkich jednostek zliczonych do zanotowania grupy Mamutów są
-właśnie te stworzenia, co jednoznacznie wskaże na prawdopodobieństwo ich spotkania w trakcie wędrówki. Zakładają oni
-jednak, że interesuje ich jedynie pierwsze 5 sekund od nadchodzących sygnałów dotyczących odkryć na kontynencie w
-trakcie lotu helikopterem,
-aby umożliwić ewentualną pieszą wycieczkę w miarę racjonalnej odległości.
+Badacze odkryli na nowym lądzie gatunek uznawany za wymarły - mamuty (ang. mammoth).
+Określ ile procent pojedynczych zwierząt zaobserwowanych w sygnałach otrzymanych
+w przeciągu ostatnich 5 sekund stanowi ten gatunek. Wskaże to na prawdopodobieństwo ich spotkania 
+w trakcie wędrówki na aktualnie przemierzanym obszarze - jeśli jest wysokie, warto jest wylądować i zaobserwować je z bliska.
+
 
 ## Zadanie 6
 
