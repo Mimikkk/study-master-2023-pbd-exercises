@@ -84,9 +84,8 @@ Wyniki powinny zawierać kolumny:
 - `avg_population` - średnia liczba osobników w stadzie
 
 ## Zadanie 4
-
 Badaczom zależy na utrzymaniu równowagi w ekosystemie, szczególnie pomiędzy dwoma gatunkami zwierząt - pand i krokodyli.
-W związku z tym wymagane jest monitorowanie tych dwóch gatunków i informować kiedy średnia liczba osobników w ostatnich
+Znajduj przypadki, w których średnia liczba osobników w ostatnich
 10 obserwacjach pand jest mniejsza od średniej liczby osobników w ostatnich 10 obserwacjach krokodyli.
 
 Wyniki powinny zawierać kolumny:
