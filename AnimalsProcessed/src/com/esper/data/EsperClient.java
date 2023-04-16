@@ -82,6 +82,31 @@ public final class EsperClient {
               having population > 0.9 * max(population) and count(*) > 1;
               """;
 
+
+      String task4 = """
+              create window heaven5#length(10) as AnimalGroupDiscoveryEvent;             
+              insert into heaven5
+                select sum(population) as population, last(its) as its, genus
+              from AnimalGroupDiscoveryEvent#time_batch(10 sec)
+              group by genus
+              order by population desc limit 5;
+              
+              
+              create window hell5#length(10) as AnimalGroupDiscoveryEvent;
+              insert into hell5
+                select sum(population) as population, last(its) as its, genus
+              from AnimalGroupDiscoveryEvent#time_batch(10 sec)
+              group by genus
+              order by population asc limit 5;
+
+
+              @name('answer')
+              select heaven.genus as genus, heaven.population as population_heaven5, 
+              hell.population as population_hell5 
+              from heaven5 as heaven join hell5 as hell on heaven.genus = hell.genus
+              where heaven.its < hell.its;
+              """;
+
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
           @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
@@ -93,7 +118,7 @@ public final class EsperClient {
             ets string,
             its string
           );
-          """ + task3, arguments);
+          """ + base, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
       Deployment = Runtime.getDeploymentService().deploy(compiled);
@@ -119,6 +144,6 @@ public final class EsperClient {
   private static EPDeployment Deployment;
   private static EPRuntime Runtime;
   private static int RecordsPerSecond = 100;
-  private static int RunTime = 5;
+  private static int RunTime = 30;
 }
 
