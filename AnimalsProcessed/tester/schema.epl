@@ -1,2 +1,8 @@
-@public @buseventtype
-create json schema ScoreEvent(house string, character string, score int, ets string, its string);
+@public @buseventtype create json schema AnimalGroupDiscoveryEvent(
+    name string,
+    latin string,
+    genus string,
+    species string,
+    population int,
+    timestamp string
+);
