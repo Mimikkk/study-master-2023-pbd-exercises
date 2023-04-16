@@ -1,21 +1,20 @@
-@name('solution')
-create window heaven5#length(10) as AnimalGroupDiscoveryEvent;
+create window heaven5#length(10) as ScoreEvent;
 insert into heaven5
 select sum(population) as population, last(its) as its, genus
-from AnimalGroupDiscoveryEvent#time_batch(10 sec)
+from ScoreEvent#time_batch(10 sec)
 group by genus
 order by population desc limit 5;
 
 
-create window hell5#length(10) as AnimalGroupDiscoveryEvent;
+create window hell5#length(10) as ScoreEvent;
 insert into hell5
 select sum(population) as population, last(its) as its, genus
-from AnimalGroupDiscoveryEvent#time_batch(10 sec)
+from ScoreEvent#time_batch(10 sec)
 group by genus
 order by population asc limit 5;
 
 
-@name('answer')
+@name('solution')
 select heaven.genus as genus, heaven.population as population_heaven5,
 hell.population as population_hell5
 from heaven5 as heaven join hell5 as hell on heaven.genus = hell.genus

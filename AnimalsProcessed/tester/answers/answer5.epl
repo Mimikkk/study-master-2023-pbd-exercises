@@ -1,6 +1,6 @@
 @name('answer')
 select group1.genus as genus, group1.ets as ets from
 pattern [
-every group1 = AnimalGroupDiscoveryEvent ->
-       (timer:interval(10 sec) and not AnimalGroupDiscoveryEvent(genus = group1.genus))
-]
+every group1 = ScoreEvent ->
+       (timer:interval(10 sec) and not ScoreEvent(genus = group1.genus))
+];
