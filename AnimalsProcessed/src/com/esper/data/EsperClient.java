@@ -107,6 +107,16 @@ public final class EsperClient {
               where heaven.its < hell.its;
               """;
 
+
+      String task5 = """
+              @name('answer')
+              select group1.genus as genus, group1.ets as ets from 
+              pattern [
+                every group1 = AnimalGroupDiscoveryEvent ->
+                       (timer:interval(10 sec) and not AnimalGroupDiscoveryEvent(genus = group1.genus))
+              ]
+              """;
+
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
           @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
@@ -143,7 +153,7 @@ public final class EsperClient {
   private static final Faker Faker = new Faker();
   private static EPDeployment Deployment;
   private static EPRuntime Runtime;
-  private static int RecordsPerSecond = 100;
+  private static int RecordsPerSecond = 10;
   private static int RunTime = 30;
 }
 
