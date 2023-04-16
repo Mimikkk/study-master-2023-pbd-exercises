@@ -53,6 +53,20 @@ public final class EsperClient {
       var configuration = new Configuration();
       var arguments = new CompilerArguments(configuration);
 
+
+      String base = """
+                    @name('answer')
+                    select * from AnimalGroupDiscoveryEvent;
+              """;
+
+      String task1 = """
+                    @name('answer')
+                    select sum(population) as sum_population, genus
+                    from AnimalGroupDiscoveryEvent#ext_timed(java.sql.Timestamp.valueOf(its).getTime(), 15sec)
+                    group by genus;
+              """;
+
+
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
           @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
@@ -61,12 +75,11 @@ public final class EsperClient {
             genus string,
             species string,
             population int,
-            timestamp string
+            ets string,
+            its string
           );
                   
-          @name('answer')
-          select * from AnimalGroupDiscoveryEvent;
-          """, arguments);
+          """ + task1, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
       Deployment = Runtime.getDeploymentService().deploy(compiled);
