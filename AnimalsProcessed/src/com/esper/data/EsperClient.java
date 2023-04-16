@@ -79,7 +79,7 @@ public final class EsperClient {
             its string
           );
                   
-          """ + task1, arguments);
+          """ + base, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
       Deployment = Runtime.getDeploymentService().deploy(compiled);
@@ -90,7 +90,7 @@ public final class EsperClient {
   }
 
   private static void logEvent(EventBean event) {
-    System.out.printf("Received : %s%n", event.getUnderlying());
+    System.out.printf("%s%n", event.getUnderlying());
   }
 
   private static void waitTillNextBatch() throws InterruptedException {

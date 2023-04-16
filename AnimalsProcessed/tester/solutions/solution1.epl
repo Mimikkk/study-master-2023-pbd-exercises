@@ -1,1 +1,4 @@
-@name('solution') select * from AnimalGroupDiscoveryEvent;
+@name('solution')
+select sum(population) as sum_population, genus
+from ScoreEvent#ext_timed(java.sql.Timestamp.valueOf(its).getTime(), 15sec)
+group by genus;

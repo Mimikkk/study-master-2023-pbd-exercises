@@ -1,8 +1,9 @@
-@public @buseventtype create json schema AnimalGroupDiscoveryEvent(
+@public @buseventtype create json schema ScoreEvent(
     name string,
     latin string,
     genus string,
     species string,
     population int,
-    timestamp string
+    ets string,
+    its string
 );
