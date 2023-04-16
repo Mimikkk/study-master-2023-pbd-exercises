@@ -117,6 +117,29 @@ public final class EsperClient {
               ]
               """;
 
+
+      String task6 = """
+              @name('answer')
+              select group1.genus as genus, group1.population as population1,
+                      group23[0].population as population2, group23[1].population as population3,
+                      group1.its as start_its, group23[1].its as end_its 
+              from pattern [
+                every (
+                          group1 = AnimalGroupDiscoveryEvent(population > 200) ->
+                          (
+                              [2] group23 = AnimalGroupDiscoveryEvent(genus = group1.genus AND population > 200)
+                              and not AnimalGroupDiscoveryEvent(genus = group1.genus AND population < 10)
+                          ) ->
+                          (
+                              AnimalGroupDiscoveryEvent(genus = group1.genus AND population > 200)
+                              until (
+                                      AnimalGroupDiscoveryEvent(genus = group1.genus AND population < 200)
+                                    )
+                          )
+                       )
+              ]
+              """;
+
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
           @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
@@ -128,7 +151,7 @@ public final class EsperClient {
             ets string,
             its string
           );
-          """ + base, arguments);
+          """ + task6, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
       Deployment = Runtime.getDeploymentService().deploy(compiled);
@@ -153,7 +176,7 @@ public final class EsperClient {
   private static final Faker Faker = new Faker();
   private static EPDeployment Deployment;
   private static EPRuntime Runtime;
-  private static int RecordsPerSecond = 10;
-  private static int RunTime = 30;
+  private static int RecordsPerSecond = 10000;
+  private static int RunTime = 10;
 }
 
