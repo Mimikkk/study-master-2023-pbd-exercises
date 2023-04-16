@@ -1,1 +1,15 @@
-@name('solution') select * from AnimalGroupDiscoveryEvent;
+@name('solution')
+select *
+from ScoreEvent
+  match_recognize(
+    partition by genus
+    measures
+      last(A.population) as last_population,
+      count(A.population) as how_many,
+      first(A.ets) as start_ets,
+      last(A.ets) as end_ets
+    pattern (A{3, } B)
+    define
+        A as A.population < prev(A.population),
+        B as B.population > prev(B.population)
+  );
