@@ -140,6 +140,23 @@ public final class EsperClient {
               ]
               """;
 
+
+      String task7 = """
+              @name('answer')
+              select * 
+              from AnimalGroupDiscoveryEvent
+              match_recognize(
+                partition by genus
+                measures A[0].population as first_population, last(A.population) as last_population,
+                        count(A.population) as how_many, A[0].ets as start_ets, last(A.ets) as end_ets
+                pattern (A {3, } B)
+                define
+                    A as A.population < prev(A.population),
+                    B as B.population > prev(B.population)      
+              );
+                           
+              """;
+
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
           @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
@@ -151,7 +168,7 @@ public final class EsperClient {
             ets string,
             its string
           );
-          """ + task6, arguments);
+          """ + task7, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
       Deployment = Runtime.getDeploymentService().deploy(compiled);
