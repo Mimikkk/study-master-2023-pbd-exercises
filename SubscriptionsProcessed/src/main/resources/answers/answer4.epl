@@ -1,0 +1,22 @@
+create window ElderlySubscriptions#ext_timed(
+  java.sql.Timestamp.valueOf(its).getTime(),
+  1min
+) as select * from Subscription;
+
+create window YoungstersSubscriptions#ext_timed(
+  java.sql.Timestamp.valueOf(its).getTime(),
+  1min
+) as select * from Subscription;
+
+insert into ElderlySubscriptions select * from Subscription where age > 60;
+insert into YoungstersSubscriptions select * from Subscription where age <= 60;
+
+@name('answer')
+select
+    es.service,
+    sum(es.price) as old_price_sum,
+    sum(ys.price) as young_price_sum
+from ElderlySubscriptions as es
+  join YoungstersSubscriptions as ys
+    where es.service = ys.service
+    group by es.service;

@@ -1,0 +1,14 @@
+@name('answer')
+select
+  s1.gender as gender1,
+  s1.price as price1,
+  s2.price as price2,
+  s3.price as price3
+from pattern [
+    every s1 = Subscription(price > 70) -> (
+      s2 = Subscription(gender=s1.gender, price > 70)
+      -> s3 = Subscription(gender=s1.gender, price > 70)
+      ) and not Subscription(gender != s1.gender)
+];
+@name('meanwhile')
+select * from Subscription;

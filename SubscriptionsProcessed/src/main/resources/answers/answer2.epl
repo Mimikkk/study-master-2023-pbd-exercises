@@ -1,0 +1,8 @@
+@name('answer')
+select
+  gender,
+  age,
+  service,
+  ets,
+  its
+from Subscription(gender='Female', age=100);

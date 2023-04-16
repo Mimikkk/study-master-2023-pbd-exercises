@@ -1,0 +1,13 @@
+@name('answer')
+select
+  student.age as age,
+  student.plan as plan,
+  student.service as service,
+  student.ets as ets,
+  student.its as its
+from pattern [
+     every timer:interval(1min) -> (
+       student = Subscription(age <= 26, plan = 'Student')
+       where timer:within(5sec)
+     )
+];

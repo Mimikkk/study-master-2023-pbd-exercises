@@ -1,0 +1,11 @@
+@public @buseventtype create json schema Subscription(
+    gender string,
+    age int,
+    service string,
+    paymentMethod string,
+    plan string,
+    price int,
+    ets string,
+    its string
+);
+

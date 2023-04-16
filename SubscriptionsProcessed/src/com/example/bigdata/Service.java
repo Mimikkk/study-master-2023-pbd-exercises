@@ -25,7 +25,7 @@ public enum Service {
         this.name = name;
     }
 
-    public static String randomService() {
+    public static String random() {
         Service[] services = values();
         return services[generator.nextInt(services.length)].name;
     }

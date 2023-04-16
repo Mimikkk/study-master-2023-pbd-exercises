@@ -1,0 +1,11 @@
+@name('answer')
+select
+  plan,
+  avg(age) as avg_age,
+  age,
+  price,
+  ets,
+  its
+from Subscription#ext_timed(java.sql.Timestamp.valueOf(its).getTime(), 30sec)
+group by plan
+having age > avg(age) + 10;

@@ -1,0 +1,13 @@
+@name('answer')
+select * from Subscription match_recognize(
+  partition by service
+  measures
+    A.service as service,
+    A.age as first_age,
+    B.age as second_age,
+    C.age as third_age
+  pattern (A B C)
+  define
+    B as B.age > prev(B.age),
+    C as C.age > prev(C.age)
+);

@@ -1,0 +1,5 @@
+@name('answer')
+select
+  gender,
+  avg(price) as avg_price
+from Subscription#ext_timed(java.sql.Timestamp.valueOf(its).getTime(), 30sec);
