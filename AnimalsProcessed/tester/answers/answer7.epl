@@ -10,6 +10,6 @@ from ScoreEvent
       last(A.ets) as end_ets
     pattern (A{3, } B)
     define
-        A as A.population < prev(A.population),
+        A as A.population < coalesce(prev(A.population), 10000),
         B as B.population > prev(B.population)
   );
