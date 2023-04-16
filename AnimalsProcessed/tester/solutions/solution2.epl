@@ -1,1 +1,4 @@
-@name('solution') select * from AnimalGroupDiscoveryEvent;
+@name('solution')
+select name, population, ets
+from ScoreEvent
+where population < 10;
