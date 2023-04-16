@@ -1,0 +1,2 @@
+{"name":"impala","latin":"Petaurista vitreolus","genus":"Martes","species":"kori","population":6467,"ets":"2023-04-16 17:18:45.481","its":"2023-04-16 17:19:15.062"}
+{"name":"impala","latin":"Petaurista vitreolus","genus":"Martes","species":"kori","population":6467,"ets":"2023-04-16 17:18:45.481","its":"2023-04-16 17:19:25.062"}

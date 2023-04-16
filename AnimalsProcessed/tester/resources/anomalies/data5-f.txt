@@ -1,0 +1,2 @@
+{"name":"impala","latin":"Petaurista vitreolus","genus":"Martes","species":"kori","population":6467,"ets":"2023-04-16 17:18:45.481","its":"2023-04-16 17:19:15.062"}
+{"name":"muskrat","latin":"Camelus gorillagorilla","genus":"Dolichotis","species":"antarcticus","population":1635,"ets":"2023-04-16 17:19:28.415","its":"2023-04-16 17:19:44.004"}
