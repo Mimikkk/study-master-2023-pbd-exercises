@@ -1,1 +1,4 @@
-@name('answer') select * from AnimalGroupDiscoveryEvent;
+@name('answer')
+select name, genus, population, max(population) as max_population
+from AnimalGroupDiscoveryEvent#ext_timed(java.sql.Timestamp.valueOf(its).getTime(), 30sec)
+group by genus having population > 0.9 * max(population) and count(*) >= 2;
