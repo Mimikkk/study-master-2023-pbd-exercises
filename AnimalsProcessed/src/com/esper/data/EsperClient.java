@@ -104,7 +104,7 @@ public final class EsperClient {
   private static final Faker Faker = new Faker();
   private static EPDeployment Deployment;
   private static EPRuntime Runtime;
-  private static int RecordsPerSecond = 1000;
-  private static int RunTime = 1;
+  private static int RecordsPerSecond = 5;
+  private static int RunTime = 20;
 }
 
