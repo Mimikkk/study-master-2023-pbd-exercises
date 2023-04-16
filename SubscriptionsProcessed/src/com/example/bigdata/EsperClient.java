@@ -9,7 +9,9 @@ import com.espertech.esper.compiler.client.EPCompiler;
 import com.espertech.esper.compiler.client.EPCompilerProvider;
 import com.espertech.esper.runtime.client.*;
 import net.datafaker.Faker;
-import net.datafaker.fileformats.Format;
+import net.datafaker.transformations.Field;
+import net.datafaker.transformations.JsonTransformer;
+import net.datafaker.transformations.Schema;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -89,21 +91,25 @@ public class EsperClient {
 
                 Instant now = Instant.now().truncatedTo(ChronoUnit.SECONDS);
                 String its = LocalDateTime.ofInstant(now, ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-                record = Format.toJson()
-                        .set("gender", () -> gender)
-                        .set("age", () -> faker.number().numberBetween(18, 101))
-                        .set("service", () -> Service.randomService())
-                        .set("paymentMethod", () -> paymentMethod)
-                        .set("plan", () -> plan)
-                        .set("price", () -> faker.number().numberBetween(40, 101))
-                        .set("ets", () -> ets)
-                        .set("its", () -> its)
-                        .build().generate();
+                var schema = Schema.of(
+                    Field.field("gender", () -> gender),
+                    Field.field("age", () -> faker.number().numberBetween(18, 101)),
+                    Field.field("service", () -> Service.randomService()),
+                    Field.field("paymentMethod", () -> paymentMethod),
+                    Field.field("plan", () -> plan),
+                    Field.field("price", () -> faker.number().numberBetween(40, 101)),
+                    Field.field("ets", () -> ets),
+                    Field.field("its", () -> its)
+                );
+
+
+                record = Transformer.generate(schema, 1);
                 runtime.getEventService().sendEventJson(record, "Subscription");
             }
             waitToEpoch();
         }
     }
+    private static final JsonTransformer<Object> Transformer = JsonTransformer.builder().build();
 
     static void waitToEpoch() throws InterruptedException {
         long millis = System.currentTimeMillis();
