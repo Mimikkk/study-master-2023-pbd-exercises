@@ -1,4 +1,4 @@
 @name('answer')
 select name, population, ets
-from AnimalGroupDiscoveryEvent
+from ScoreEvent
 where population < 10;
