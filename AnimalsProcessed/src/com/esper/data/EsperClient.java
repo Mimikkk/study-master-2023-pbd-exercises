@@ -20,16 +20,10 @@ public final class EsperClient {
     initializeParameters(arguments);
     initializeEsper();
 
-    {
-      var i = new AtomicInteger();
-      var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "answer");
-      statement.addListener((events, __, ___, ____) -> {
-        System.out.printf("%d : %s\n", i.addAndGet(1), "-".repeat(0x2f));
-        for (EventBean event : events) {
-          logEvent(event);
-        }
-      });
-    }
+    var statement = Runtime.getDeploymentService().getStatement(Deployment.getDeploymentId(), "answer");
+    statement.addListener((events, __, ___, ____) -> {
+      for (EventBean event : events) logEvent(event);
+    });
 
     var provider = new AnimalGroupDiscoveryProvider(Faker);
     var service = Runtime.getEventService();
@@ -61,19 +55,18 @@ public final class EsperClient {
 
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
-        @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
-          name string,
-          latin string,
-          genus string,
-          species string,
-          population int,
-          timestamp string
-        );
-                
-                
-        @name('answer')
-        select * from AnimalGroupDiscoveryEvent;
-        """, arguments);
+          @public @buseventtype create json schema AnimalGroupDiscoveryEvent(
+            name string,
+            latin string,
+            genus string,
+            species string,
+            population int,
+            timestamp string
+          );
+                  
+          @name('answer')
+          select * from AnimalGroupDiscoveryEvent;
+          """, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
       Deployment = Runtime.getDeploymentService().deploy(compiled);

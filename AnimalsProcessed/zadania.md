@@ -5,12 +5,14 @@ Na nieznanym kontynencie ekspedycje naukowe dokonują rejestracji zaobserwowanyc
 W strumieniu pojawiają się zdarzenia zgodne ze schematem `AnimalGroupDiscoveryEvent`.
 
 ```sql
-create json schema AnimalGroupDiscoveryEvent(
+create
+json schema AnimalGroupDiscoveryEvent(
   name string,  latin string,  genus string,  species string,
   population int,  its string,  ets string);
 ```
 
-Każde zdarzenie związane z jest z faktem rejestracji zaobserwowanego stada zwierząt określonego gatunku w określonej liczbie.
+Każde zdarzenie związane z jest z faktem rejestracji zaobserwowanego stada zwierząt określonego gatunku w określonej
+liczbie.
 
 Dane są uzupełnione są o dwie etykiety czasowe.
 
@@ -47,7 +49,8 @@ Opracuj rozwiązania poniższych zadań.
 
 ## Zadanie 1
 
-Dla rejestracji dokonanych w ciągu ostatnich 15 sekund, utrzymuj informacje dotyczące sumarycznej liczby osobników w zaobserwowanych stadach dla każdego z gatunków.
+Dla rejestracji dokonanych w ciągu ostatnich 15 sekund, utrzymuj informacje dotyczące sumarycznej liczby osobników w
+zaobserwowanych stadach dla każdego z gatunków.
 
 Wyniki powinny zawierać kolumny:
 
@@ -56,7 +59,7 @@ Wyniki powinny zawierać kolumny:
 
 ## Zadanie 2
 
-Wykrywaj przypadki zaobserwowania zagrożonych stad zwierząt liczących poniżej 10 osobników. 
+Wykrywaj przypadki zaobserwowania zagrożonych stad zwierząt liczących poniżej 10 osobników.
 
 Wyniki powinny zawierać kolumny:
 
@@ -67,9 +70,11 @@ Wyniki powinny zawierać kolumny:
 ## Zadanie 3
 
 Wykrywaj przypadki obserwacji stosunkowo dużych grupy osobników dla danego gatunku.
-Przez stosunkową dużą grupę rozumiemy tak, w której liczba osobników jest większa niż 90% liczby osobników w największej grupie zaobserwowanej w ramach tego samego gatunku, dla rejestracji z ostatnich 30 sekund.
+Przez stosunkową dużą grupę rozumiemy tak, w której liczba osobników jest większa niż 90% liczby osobników w największej
+grupie zaobserwowanej w ramach tego samego gatunku, dla rejestracji z ostatnich 30 sekund.
 
-Nie wykrywaj przypadków trywialnych, w których w w ciągo ostatnich 30 sekund została zarejestrowana tylko jedna grupa osobników.
+Nie wykrywaj przypadków trywialnych, w których w w ciągo ostatnich 30 sekund została zarejestrowana tylko jedna grupa
+osobników.
 
 Wyniki powinny zawierać kolumny:
 
@@ -81,23 +86,30 @@ Wyniki powinny zawierać kolumny:
 ## Zadanie 4
 
 Badaczy szczególnie martwią sytuację, w których gatunek dramatycznie zmniejsza swoją populację.
-Dlatego chcą, aby dla każdych kolejnych 10 sekund czasu rejestracji były wyliczane sumy osobników w odkrytych grupach zwięrząt dla każdego z gatunków. Na podstawie tych statystyk powinny być utrzymywane dwie listy:
-- lista 5 gatunków o sumarycznej największej liczbie osobników - nazwijmy ją 'heaven5' 
+Dlatego chcą, aby dla każdych kolejnych 10 sekund czasu rejestracji były wyliczane sumy osobników w odkrytych grupach
+zwięrząt dla każdego z gatunków. Na podstawie tych statystyk powinny być utrzymywane dwie listy:
+
+- lista 5 gatunków o sumarycznej największej liczbie osobników - nazwijmy ją 'heaven5'
 - lista 5 gatunków o sumarycznej najmniejszej liczbie osobników w zaobserwowanych grupach - nazwijmy ją 'hell5'
 
-Znajduj przypadki, w których gatunek w jednym interwale 10 sekund znajdował się na liście 'heaven5', a już w następnym pojawił się na liście 'hell5'.
+Znajduj przypadki, w których gatunek w jednym interwale 10 sekund znajdował się na liście 'heaven5', a już w następnym
+pojawił się na liście 'hell5'.
 
 Wyniki powinny zawierać kolumny:
 
 - `genus` - nazwa gatunku
-- `population_heaven5` - sumaryczna liczba osobników zarejestrowanych w grupach tego gatunku z listy 'heaven5' dla poprzedniego interwału 10 sekund   
-- `population_hell5` - sumaryczna liczba osobników zarejestrowanych w grupach tego gatunku z listy 'hell5' dla właśnie zakończonego interwału 10 sekund   
+- `population_heaven5` - sumaryczna liczba osobników zarejestrowanych w grupach tego gatunku z listy 'heaven5' dla
+  poprzedniego interwału 10 sekund
+- `population_hell5` - sumaryczna liczba osobników zarejestrowanych w grupach tego gatunku z listy 'hell5' dla właśnie
+  zakończonego interwału 10 sekund
 
 ## Zadanie 5
 
-Badaczy martwią sytuacje, w których gatunek nie pojawia się w ramach obserwacji przez dłuższy czas. 
+Badaczy martwią sytuacje, w których gatunek nie pojawia się w ramach obserwacji przez dłuższy czas.
 
-Dla każdego gatunku znajduj przypadki, w po dokonanej obserwacji stada określonego gatunku następuje przerwa trwająca co najmniej 10 sekund (czasu systemowego) w trakcie, której nie dokonano obserwacji nawet jednego stada tego samego gatunku.  
+Dla każdego gatunku znajduj przypadki, w po dokonanej obserwacji stada określonego gatunku następuje przerwa trwająca co
+najmniej 10 sekund (czasu systemowego) w trakcie, której nie dokonano obserwacji nawet jednego stada tego samego
+gatunku.
 
 Wyniki powinny zawierać kolumny:
 
@@ -106,9 +118,12 @@ Wyniki powinny zawierać kolumny:
 
 ## Zadanie 6
 
-Liczba stad, które należy obserwować przekracza możliwości badaczy. Dlatego postanowiono, że te gatunki, które są stabilne nie będą już więcej tak dokładnie badane. 
-Gatunek stabilny to taki, którego co najmniej trzy stada zostały kolejno zaobserwowane (nie konieczne bezpośrednio po sobie) i za każdym razem wielkość stada przekraczała 200 sztuk. 
-Uwaga! Jeśli pomiędzy pierwszym a trzecim zaobserwowanym stadem, dokonano obserwacji stada tego samego gatunku o liczbie sztuk poniżej 10, wówczas gatunek do stabilnych zaliczyć nie można.
+Liczba stad, które należy obserwować przekracza możliwości badaczy. Dlatego postanowiono, że te gatunki, które są
+stabilne nie będą już więcej tak dokładnie badane.
+Gatunek stabilny to taki, którego co najmniej trzy stada zostały kolejno zaobserwowane (nie konieczne bezpośrednio po
+sobie) i za każdym razem wielkość stada przekraczała 200 sztuk.
+Uwaga! Jeśli pomiędzy pierwszym a trzecim zaobserwowanym stadem, dokonano obserwacji stada tego samego gatunku o liczbie
+sztuk poniżej 10, wówczas gatunek do stabilnych zaliczyć nie można.
 
 Wykrywaj stabilne gatunki.
 
@@ -123,13 +138,15 @@ Wyniki powinny zawierać kolumny:
 
 ## Zadanie 7
 
-Zwierzęta zmieniają swoje instynkty stadne. Chcemy znajdywać te gatunki, w których instynkty stadne zanikają. 
-Wyszukuj te serie rejestracji stad tego samego gatunku, które składają się przynajmniej z trzech zdarzeń, w trakcie których każda kolejna obserwacja okazywała się mniej liczna niż poprzednia. Każda taka seria kończyć się powinna obserwacją, w której liczba osobników w stadzie tego samego gatunku wreszcie wzrosła.
+Zwierzęta zmieniają swoje instynkty stadne. Chcemy znajdywać te gatunki, w których instynkty stadne zanikają.
+Wyszukuj te serie rejestracji stad tego samego gatunku, które składają się przynajmniej z trzech zdarzeń, w trakcie
+których każda kolejna obserwacja okazywała się mniej liczna niż poprzednia. Każda taka seria kończyć się powinna
+obserwacją, w której liczba osobników w stadzie tego samego gatunku wreszcie wzrosła.
 
 Wyniki powinny zawierać kolumny:
 
-- `first_population` - populacja pierwszego stada w serii malejących stad 
+- `first_population` - populacja pierwszego stada w serii malejących stad
 - `last_population` - populacja ostatniego stada w serii malejących stad
 - `how_many` - liczba rejestracji stad w serii malejących stad
-- `start_ets` - czas obserwacji pierwszego stada w serii malejących stad 
+- `start_ets` - czas obserwacji pierwszego stada w serii malejących stad
 - `end_ets` - czas obserwacji ostatniego stada w serii malejących stad
