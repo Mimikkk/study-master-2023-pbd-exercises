@@ -66,6 +66,21 @@ public final class EsperClient {
                     group by genus;
               """;
 
+      String task2 = """
+                    @name('answer')
+                    select name, population, ets
+                    from AnimalGroupDiscoveryEvent
+                    where population < 10;
+              """;
+
+
+      String task3 = """
+              @name('answer')
+              select name, genus, population, max(population) as max_population
+              from AnimalGroupDiscoveryEvent#ext_timed(java.sql.Timestamp.valueOf(its).getTime(), 30 sec)
+              group by genus
+              having population > 0.9 * max(population) and count(*) > 1;
+              """;
 
       var compiler = EPCompilerProvider.getCompiler();
       var compiled = compiler.compile("""
@@ -78,8 +93,7 @@ public final class EsperClient {
             ets string,
             its string
           );
-                  
-          """ + base, arguments);
+          """ + task3, arguments);
 
       Runtime = EPRuntimeProvider.getRuntime("http://localhost:port", configuration);
       Deployment = Runtime.getDeploymentService().deploy(compiled);
@@ -104,7 +118,7 @@ public final class EsperClient {
   private static final Faker Faker = new Faker();
   private static EPDeployment Deployment;
   private static EPRuntime Runtime;
-  private static int RecordsPerSecond = 5;
-  private static int RunTime = 20;
+  private static int RecordsPerSecond = 100;
+  private static int RunTime = 5;
 }
 
