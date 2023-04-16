@@ -1,0 +1,17 @@
+{"name":"bee","latin":"Mogera irregularis","genus":"Macroscelides","species":"gangeticus","population":8290,"ets":"2023-04-16 16:12:53.725","its":"2023-04-16 16:13:09.346"}
+{"name":"goldfish","latin":"Varecia concolor","genus":"Cebuella","species":"fulica","population":6835,"ets":"2023-04-16 16:12:47.874","its":"2023-04-16 16:13:09.961"}
+{"name":"dinosaur","latin":"Miopithecus nivea","genus":"Pteropus","species":"rufus","population":4185,"ets":"2023-04-16 16:12:55.033","its":"2023-04-16 16:13:09.673"}
+{"name":"turtle","latin":"Tenrec stenolepis","genus":"Capricornis","species":"crumenifer","population":9515,"ets":"2023-04-16 16:12:53.341","its":"2023-04-16 16:13:09.395"}
+{"name":"whale","latin":"Tupaia viverrinus","genus":"Castor","species":"sirtalisannectens","population":689,"ets":"2023-04-16 16:12:44.538","its":"2023-04-16 16:13:09.093"}
+{"name":"mole","latin":"Theropithecus caeruleus","genus":"Setifer","species":"hasselti","population":7017,"ets":"2023-04-16 16:12:54.126","its":"2023-04-16 16:13:10.487"}
+{"name":"guinea pig","latin":"Muntiacus catussilvestris","genus":"Aepyprymnus","species":"pelamis","population":2926,"ets":"2023-04-16 16:13:02.142","its":"2023-04-16 16:13:10.445"}
+{"name":"marten","latin":"Capricornis apiaster","genus":"Capra","species":"vulgare","population":7494,"ets":"2023-04-16 16:12:49.482","its":"2023-04-16 16:13:10.333"}
+{"name":"mouse","latin":"Cricetus tiburo","genus":"Trichosurus","species":"jubatus","population":3010,"ets":"2023-04-16 16:13:04.502","its":"2023-04-16 16:13:10.36"}
+{"name":"woodchuck","latin":"Phacochoerus grunniens","genus":"Colobus","species":"iris","population":7492,"ets":"2023-04-16 16:13:08.841","its":"2023-04-16 16:13:10.637"}
+{"name":"pug","latin":"Gulo erithacus","genus":"Castor","species":"hercules","population":5622,"ets":"2023-04-16 16:12:58.762","its":"2023-04-16 16:13:11.386"}
+{"name":"cat","latin":"Gulo erithacus","genus":"Meow","species":"hercules","population":300,"ets":"2023-04-16 16:12:59.762","its":"2023-04-16 16:13:12.386"}
+{"name":"cat","latin":"Gulo erithacus","genus":"Meow","species":"hercules","population":400,"ets":"2023-04-16 16:12:58.762","its":"2023-04-16 16:13:13.386"}
+{"name":"cat","latin":"Gulo erithacus","genus":"Meow","species":"hercules","population":7,"ets":"2023-04-16 16:12:39.762","its":"2023-04-16 16:13:14.386"}
+{"name":"cat","latin":"Gulo erithacus","genus":"Meow","species":"hercules","population":500,"ets":"2023-04-16 16:12:39.762","its":"2023-04-16 16:13:14.386"}
+{"name":"cat","latin":"Gulo erithacus","genus":"Meow","species":"hercules","population":600,"ets":"2023-04-16 16:12:48.762","its":"2023-04-16 16:13:15.386"}
+{"name":"cat","latin":"Gulo erithacus","genus":"Meow","species":"hercules","population":10,"ets":"2023-04-16 16:12:58.762","its":"2023-04-16 16:13:16.386"}

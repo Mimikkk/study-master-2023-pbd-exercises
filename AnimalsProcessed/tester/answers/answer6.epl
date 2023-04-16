@@ -1,19 +1,15 @@
 @name('answer')
-select group1.genus as genus, group1.population as population1,
-      group23[0].population as population2, group23[1].population as population3,
-      group1.its as start_its, group23[1].its as end_its
+select
+  g1.genus as genus, g1.population as population1,
+  g23[0].population as population2, g23[1].population as population3,
+  g1.its as start_its, g23[1].its as end_its
 from pattern [
-    every (
-              group1 = AnimalGroupDiscoveryEvent(population > 200) ->
-              (
-                  [2] group23 = AnimalGroupDiscoveryEvent(genus = group1.genus AND population > 200)
-                  and not AnimalGroupDiscoveryEvent(genus = group1.genus AND population < 10)
-              ) ->
-              (
-                  AnimalGroupDiscoveryEvent(genus = group1.genus AND population > 200)
-                  until (
-                          AnimalGroupDiscoveryEvent(genus = group1.genus AND population < 200)
-                        )
-              )
-           )
-    ]
+  every g1 = ScoreEvent(population > 200)
+    -> (
+      [2] (g23 = ScoreEvent(genus = g1.genus, population > 200)
+      and not ScoreEvent(genus = g1.genus, population < 10))
+    ) -> (
+      ScoreEvent(genus = g1.genus, population > 200)
+      until ScoreEvent(genus = g1.genus, population < 200)
+    )
+];
